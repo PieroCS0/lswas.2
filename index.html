@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>Flores Amarillas 🌻</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         FASE 1 — INTRODUCCIÓN
+    ========================================== -->
+
+    <main id="intro" class="intro">
+
+        <button
+            id="sunflowerButton"
+            class="sunflower-button"
+            aria-label="Presiona el girasol"
+        >
+            <span class="intro-sunflower">🌻</span>
+        </button>
+
+        <p class="press-text">PRESIÓNAME</p>
+
+    </main>
+
+
+    <!-- =========================================
+         FASE 2 — UNIVERSO
+    ========================================== -->
+
+    <main id="universe" class="universe">
+
+        <!-- Fondo espacial -->
+        <div class="stars" id="stars"></div>
+
+        <!-- Nebulosas -->
+        <div class="nebula nebula-one"></div>
+        <div class="nebula nebula-two"></div>
+        <div class="nebula nebula-three"></div>
+
+        <!-- Partículas -->
+        <div id="particles"></div>
+
+        <!-- Contenido principal -->
+        <section class="content">
+
+            <div class="title-container">
+                <p class="small-title">PARA TI</p>
+
+                <h1>
+                    Feliz día de las<br>
+                    <span>Flores Amarillas</span> 🌻
+                </h1>
+
+                <div class="title-line"></div>
+            </div>
+
+
+            <!-- Flores flotantes -->
+            <div id="flowers" class="flowers">
+
+                <button
+                    class="flower flower-1"
+                    data-message="Una florecita para ti 🌻"
+                    aria-label="Flor amarilla"
+                >
+                    🌻
+                </button>
+
+                <button
+                    class="flower flower-2"
+                    data-message="Espero que esto te saque una sonrisa."
+                    aria-label="Flor amarilla"
+                >
+                    🌼
+                </button>
+
+                <button
+                    class="flower flower-3"
+                    data-message="No podía darte flores físicas, así que tocó hacerlas digitales JAJA."
+                    aria-label="Flor amarilla"
+                >
+                    🌻
+                </button>
+
+                <button
+                    class="flower flower-4"
+                    data-message="Una pequeña sorpresa para ti ✨"
+                    aria-label="Flor amarilla"
+                >
+                    🌼
+                </button>
+
+                <button
+                    class="flower flower-5"
+                    data-message="Que nunca falten motivos para sonreír 🌻"
+                    aria-label="Flor amarilla"
+                >
+                    🌻
+                </button>
+
+                <button
+                    class="flower flower-6"
+                    data-message="Te mando un pequeño pedacito de sol."
+                    aria-label="Flor amarilla"
+                >
+                    🌼
+                </button>
+
+            </div>
+
+
+            <!-- Mensaje emergente -->
+            <div id="message" class="message">
+
+                <div class="message-glow"></div>
+
+                <button
+                    id="closeMessage"
+                    class="close-message"
+                    aria-label="Cerrar mensaje"
+                >
+                    ×
+                </button>
+
+                <span id="messageText"></span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

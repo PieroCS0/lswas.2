@@ -1,0 +1,892 @@
+/* =====================================================
+   CONFIGURACIÓN GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    touch-action: manipulation;
+}
+
+
+/* =====================================================
+   FASE 1 — INTRODUCCIÓN
+===================================================== */
+
+.intro {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100dvh;
+
+    background: #000;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 100;
+
+    transition:
+        opacity 1.4s ease,
+        visibility 1.4s ease;
+}
+
+
+/* El botón no tiene apariencia de botón */
+
+.sunflower-button {
+    border: none;
+    background: transparent;
+
+    width: min(62vw, 280px);
+    height: min(62vw, 280px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    position: relative;
+
+    outline: none;
+
+    animation: sunflowerFloat 3.5s ease-in-out infinite;
+
+    filter:
+        drop-shadow(0 0 10px rgba(255, 210, 30, 0.3))
+        drop-shadow(0 0 25px rgba(255, 193, 7, 0.15));
+
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+
+/* Girasol */
+
+.intro-sunflower {
+    font-size: min(55vw, 245px);
+
+    line-height: 1;
+
+    display: block;
+
+    user-select: none;
+
+    filter:
+        drop-shadow(0 0 7px rgba(255, 217, 0, 0.5))
+        drop-shadow(0 0 20px rgba(255, 190, 0, 0.25));
+}
+
+
+/* Pequeño pulso al tocar */
+
+.sunflower-button:active {
+    transform: scale(0.9);
+}
+
+
+/* Texto */
+
+.press-text {
+    margin-top: 14px;
+
+    font-size: 11px;
+    letter-spacing: 5px;
+
+    color: rgba(255, 232, 130, 0.8);
+
+    font-weight: 500;
+
+    animation:
+        textPulse 2.5s ease-in-out infinite;
+
+    user-select: none;
+}
+
+
+/* Movimiento suave del girasol */
+
+@keyframes sunflowerFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-2deg);
+    }
+
+    50% {
+        transform: translateY(-8px) rotate(2deg);
+    }
+}
+
+
+@keyframes textPulse {
+
+    0%,
+    100% {
+        opacity: 0.45;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   CUANDO SE ABRE EL UNIVERSO
+===================================================== */
+
+.intro.revealing {
+    background: #000;
+
+    pointer-events: none;
+}
+
+.intro.revealing .sunflower-button {
+    animation: sunflowerExplosion 1.1s ease forwards;
+}
+
+.intro.revealing .press-text {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+
+@keyframes sunflowerExplosion {
+
+    0% {
+        transform: scale(1);
+        filter:
+            drop-shadow(0 0 10px rgba(255, 210, 30, 0.5))
+            drop-shadow(0 0 25px rgba(255, 193, 7, 0.2));
+    }
+
+    45% {
+        transform: scale(1.22);
+
+        filter:
+            drop-shadow(0 0 20px rgba(255, 240, 100, 1))
+            drop-shadow(0 0 55px rgba(255, 200, 0, 0.9))
+            drop-shadow(0 0 100px rgba(255, 160, 0, 0.5));
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+
+        filter:
+            drop-shadow(0 0 40px rgba(255, 240, 100, 1))
+            drop-shadow(0 0 120px rgba(255, 180, 0, 1));
+    }
+}
+
+
+/* =====================================================
+   UNIVERSO
+===================================================== */
+
+.universe {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100dvh;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            #161005 0%,
+            #080703 35%,
+            #020203 75%,
+            #000 100%
+        );
+
+    visibility: hidden;
+
+    transition:
+        opacity 2s ease,
+        visibility 2s ease;
+
+    z-index: 1;
+}
+
+
+.universe.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =====================================================
+   ESTRELLAS
+===================================================== */
+
+.stars {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,220,100,.7) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,.55) 0 1px, transparent 1.5px);
+
+    background-size:
+        85px 90px,
+        140px 150px,
+        210px 190px;
+
+    background-position:
+        10px 20px,
+        50px 70px,
+        100px 20px;
+
+    opacity: 0;
+
+    animation:
+        starsAppear 3s ease forwards,
+        starsMove 30s linear infinite;
+}
+
+
+@keyframes starsAppear {
+    to {
+        opacity: .85;
+    }
+}
+
+
+@keyframes starsMove {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+}
+
+
+/* =====================================================
+   NEBULOSAS
+===================================================== */
+
+.nebula {
+    position: absolute;
+
+    width: 70vw;
+    height: 70vw;
+
+    max-width: 450px;
+    max-height: 450px;
+
+    border-radius: 50%;
+
+    filter: blur(70px);
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.nebula-one {
+    background: rgba(255, 180, 0, .12);
+
+    top: 5%;
+    left: -25%;
+
+    animation: nebulaAppear 3s ease forwards;
+}
+
+
+.nebula-two {
+    background: rgba(255, 220, 60, .08);
+
+    bottom: -10%;
+    right: -30%;
+
+    animation: nebulaAppear 4s ease forwards;
+}
+
+
+.nebula-three {
+    background: rgba(180, 110, 0, .07);
+
+    top: 35%;
+    right: -35%;
+
+    animation: nebulaAppear 5s ease forwards;
+}
+
+
+@keyframes nebulaAppear {
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =====================================================
+   PARTÍCULAS
+===================================================== */
+
+#particles {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+}
+
+
+.particle {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #ffd83d;
+
+    box-shadow:
+        0 0 5px #ffd83d,
+        0 0 15px rgba(255, 194, 0, .8);
+
+    animation:
+        particleFly 1.4s cubic-bezier(.15,.75,.3,1) forwards;
+}
+
+
+@keyframes particleFly {
+
+    0% {
+        left: 50%;
+        top: 50%;
+
+        opacity: 1;
+
+        transform: scale(.2);
+    }
+
+    100% {
+        left: calc(50% + var(--x));
+        top: calc(50% + var(--y));
+
+        opacity: 0;
+
+        transform: scale(1.3);
+    }
+}
+
+
+/* =====================================================
+   CONTENIDO
+===================================================== */
+
+.content {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 13dvh;
+}
+
+
+/* =====================================================
+   TÍTULO
+===================================================== */
+
+.title-container {
+    text-align: center;
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    animation: titleAppear 1.5s ease 2s forwards;
+
+    z-index: 10;
+
+    padding: 0 20px;
+}
+
+
+@keyframes titleAppear {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.small-title {
+    font-size: 9px;
+
+    letter-spacing: 5px;
+
+    color: rgba(255, 219, 86, .65);
+
+    margin-bottom: 12px;
+}
+
+
+h1 {
+    font-size: clamp(27px, 7vw, 42px);
+
+    line-height: 1.16;
+
+    font-weight: 300;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 15px rgba(255, 216, 70, .2);
+}
+
+
+h1 span {
+    color: #ffd83d;
+
+    font-weight: 500;
+
+    text-shadow:
+        0 0 8px rgba(255, 214, 50, .65),
+        0 0 30px rgba(255, 190, 0, .35);
+}
+
+
+.title-line {
+    width: 45px;
+    height: 1px;
+
+    background: rgba(255, 218, 70, .6);
+
+    margin: 17px auto 0;
+
+    box-shadow:
+        0 0 10px rgba(255, 200, 0, .7);
+}
+
+
+/* =====================================================
+   FLORES
+===================================================== */
+
+.flowers {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+}
+
+
+.flower {
+    position: absolute;
+
+    border: none;
+    background: transparent;
+
+    font-size: clamp(40px, 13vw, 75px);
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    padding: 10px;
+
+    pointer-events: auto;
+
+    opacity: 0;
+
+    transform: scale(.4);
+
+    filter:
+        drop-shadow(0 0 7px rgba(255, 220, 50, .55))
+        drop-shadow(0 0 22px rgba(255, 190, 0, .25));
+
+    user-select: none;
+
+    transition:
+        transform .25s ease,
+        filter .25s ease;
+}
+
+
+/* Entrada de flores */
+
+.flower {
+    animation:
+        flowerAppear 1.2s ease forwards,
+        flowerFloat 5s ease-in-out infinite;
+}
+
+
+.flower-1 {
+    top: 34%;
+    left: 7%;
+
+    animation-delay: 2.5s, 3.7s;
+
+    transform: rotate(-15deg);
+}
+
+
+.flower-2 {
+    top: 28%;
+    right: 7%;
+
+    animation-delay: 2.8s, 4s;
+
+    transform: rotate(12deg);
+}
+
+
+.flower-3 {
+    top: 49%;
+    right: 3%;
+
+    animation-delay: 3.1s, 4.3s;
+
+    transform: rotate(17deg);
+}
+
+
+.flower-4 {
+    top: 54%;
+    left: 4%;
+
+    animation-delay: 3.4s, 4.6s;
+
+    transform: rotate(-10deg);
+}
+
+
+.flower-5 {
+    bottom: 13%;
+    right: 14%;
+
+    animation-delay: 3.7s, 4.9s;
+
+    transform: rotate(12deg);
+}
+
+
+.flower-6 {
+    bottom: 10%;
+    left: 15%;
+
+    animation-delay: 4s, 5.2s;
+
+    transform: rotate(-12deg);
+}
+
+
+@keyframes flowerAppear {
+
+    0% {
+        opacity: 0;
+        transform: scale(.2) rotate(0deg);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.12) rotate(4deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+
+@keyframes flowerFloat {
+
+    0%,
+    100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -9px;
+    }
+}
+
+
+.flower:active {
+    transform: scale(1.25) !important;
+
+    filter:
+        drop-shadow(0 0 12px rgba(255, 235, 90, 1))
+        drop-shadow(0 0 35px rgba(255, 190, 0, .8));
+}
+
+
+/* =====================================================
+   MENSAJE
+===================================================== */
+
+.message {
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 8%;
+
+    width: min(86vw, 350px);
+
+    padding: 22px 45px 22px 22px;
+
+    transform:
+        translate(-50%, 30px)
+        scale(.9);
+
+    background:
+        rgba(18, 14, 4, .78);
+
+    border:
+        1px solid rgba(255, 214, 70, .28);
+
+    border-radius: 20px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    color: rgba(255, 247, 210, .95);
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    text-align: center;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease,
+        visibility .35s ease;
+
+    z-index: 50;
+
+    box-shadow:
+        0 0 30px rgba(255, 190, 0, .12);
+}
+
+
+.message.show {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translate(-50%, 0)
+        scale(1);
+}
+
+
+.message-glow {
+    position: absolute;
+
+    inset: -1px;
+
+    border-radius: inherit;
+
+    pointer-events: none;
+
+    box-shadow:
+        0 0 25px rgba(255, 207, 45, .12);
+}
+
+
+.close-message {
+    position: absolute;
+
+    top: 7px;
+    right: 10px;
+
+    width: 30px;
+    height: 30px;
+
+    border: none;
+    background: transparent;
+
+    color: rgba(255, 230, 120, .75);
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   EXPLOSIÓN FINAL
+===================================================== */
+
+.burst-ring {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    width: 30px;
+    height: 30px;
+
+    border: 2px solid rgba(255, 215, 55, .8);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    transform: translate(-50%, -50%) scale(.2);
+
+    animation: ringExplosion 1.2s ease-out forwards;
+
+    z-index: 90;
+}
+
+
+@keyframes ringExplosion {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(.2);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(12);
+    }
+}
+
+
+/* =====================================================
+   DISPOSITIVOS PEQUEÑOS
+===================================================== */
+
+@media (max-height: 700px) {
+
+    .content {
+        padding-top: 8dvh;
+    }
+
+    .flower {
+        font-size: 43px;
+    }
+
+    .flower-1 {
+        top: 31%;
+    }
+
+    .flower-2 {
+        top: 27%;
+    }
+
+    .flower-3 {
+        top: 48%;
+    }
+
+    .flower-4 {
+        top: 52%;
+    }
+
+    .flower-5 {
+        bottom: 9%;
+    }
+
+    .flower-6 {
+        bottom: 7%;
+    }
+
+    .message {
+        bottom: 5%;
+    }
+}
+
+
+/* =====================================================
+   PANTALLAS GRANDES / TABLET
+===================================================== */
+
+@media (min-width: 600px) {
+
+    .content {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .flower-1 {
+        left: 3%;
+    }
+
+    .flower-2 {
+        right: 3%;
+    }
+
+    .flower-3 {
+        right: 0;
+    }
+
+    .flower-4 {
+        left: 0;
+    }
+}
+
+
+/* =====================================================
+   REDUCIR ANIMACIONES SI EL SISTEMA LO SOLICITA
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+}
